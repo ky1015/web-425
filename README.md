@@ -1,2 +1,4 @@
-# web-425
-Classwork for web-425 at Bellevue University
+# WEB 425 Angular with TypeScript
+## Contributors
+-Kylie Struhs
+-Richard Krasso
