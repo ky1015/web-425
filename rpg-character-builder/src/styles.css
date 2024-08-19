@@ -1,1 +1,89 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre&family=MedievalSharp&family=Roboto&display=swap');
+
+
+body, header, nav, main, section, footer, img, figure, figcaption, div, ul {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  height: 100%;
+  background-color: #EBC887;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0 auto;
+  width: 75%;
+  background-color: beige;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+}
+
+h1 {
+  font-family: 'MedievalSharp', serif;
+  text-align: center;
+}
+
+h2 {
+  font-family: 'Averia-Serif-Libre', serif;
+  color: #035E1B;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  padding: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Averia-Serif-Libre', serif;
+  color: #035E1B;
+  display: inline;
+  text-align: center;
+}
+
+.navbar li:hover {
+  background-color: #1C1B22;
+  color: #cccccc ;
+  cursor: pointer;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.footer {
+  background-color: #D5B579;
+  color: #0A090C;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.footer a {
+  color: #0A090C;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
