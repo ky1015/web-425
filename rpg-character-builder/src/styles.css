@@ -54,8 +54,6 @@ p {
   transition: background-color 0.3s ease, color 0.3s ease;
   font-family: 'Averia-Serif-Libre', serif;
   color: #035E1B;
-  display: inline;
-  text-align: center;
 }
 
 .navbar li:hover {
@@ -69,6 +67,11 @@ p {
   color: inherit;
 }
 
+.navbar {
+  text-align: center;
+  padding: 10px;
+  display: inline;
+}
 
 .footer {
   background-color: #D5B579;
