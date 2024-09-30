@@ -10,18 +10,18 @@ export interface Character {
   sheetId: number;
   }
 
-  import { Component } from '@angular/core';
-  import { FormsModule, NgForm } from '@angular/forms';
+  import { Component, EventEmitter, Output } from '@angular/core';
+  import { FormsModule } from '@angular/forms';
   import { CommonModule } from '@angular/common';
+  import { CharacterListComponent } from "../character-list/character-list.component";
 
   @Component({
   selector: 'app-sheet',
   standalone: true,
-  imports: [FormsModule, CommonModule],
   template: `
   <div class="sheet-form-container">
     <form class="sheet-form" #sheetForm="ngForm"
-    (ngSubmit)="generateCharacter();">
+    (ngSubmit)="generateCharacter()">
       <h1>Fill out the fields with your character's name, gender and class.</h1>
         <fieldset>
           <legend>My Character</legend>
@@ -45,23 +45,9 @@ export interface Character {
   </form>
 
     <div class="sheet-summary">
-      <h1>Character Sheet</h1>
-        <div *ngIf="sheet.characters.length > 0; else noCharacters">
-          <ul>
-          <div class = "card">
-            <li *ngFor="let character of sheet.characters">
-              <strong>{{ character.name }}</strong> <br />
-              {{ character.gender }}<br />
-             {{ character.characterClass}}
-            </li>
-            </div>
-          </ul>
+      <app-character-list [sheet]="sheet"></app-character-list>
           </div>
-    <ng-template #noCharacters>
-      <p>You haven't created a character yet.</p>
-    </ng-template>
       </div>
-    </div>
   `,
   styles: [ `
 
@@ -84,7 +70,7 @@ export interface Character {
     margin-bottom: 20px;
   }
 
-  label, select, gender {
+  label, select, .gender {
     display: block;
     margin-bottom: 5px;
   }
@@ -120,7 +106,8 @@ export interface Character {
     background-color: #ccc;
   }
   `
-  ]
+  ],
+  imports: [FormsModule, CommonModule, CharacterListComponent],
   })
   export class CreateCharacterComponent {
     characters: Character[];
@@ -133,6 +120,7 @@ export interface Character {
     genders: string[];
     classes: string[];
 
+    @Output() sheetUpdated = new EventEmitter<Sheet>();
   constructor() {
   this.characters = [
     {id: 1, name: "Dylan", gender: "Male", characterClass: "Rogue"},
@@ -152,7 +140,7 @@ export interface Character {
   generateCharacter() {
     const selectedCharacterNum = Number(this.selectedCharacterId);
     const selectedCharacter = this.characters.find(character => character.id === selectedCharacterNum);
-    // random number between 1 and 1000 for order Id no decimal places
+    // random number
     this.sheet.sheetId = Math.floor(Math.random() * 1000) + 1;
     if (selectedCharacter !== undefined) {
       const CharacterToAdd = {
@@ -163,10 +151,11 @@ export interface Character {
       }
       this.sheet.characters.push(CharacterToAdd);
       console.log('Your Character:', this.sheet);
+      this.sheetUpdated.emit(this.sheet);
       this.resetForm();
     } else {
       console.error('Character not found',
-      this.selectedCharacterId)
+      this.selectedCharacterId);
     }
   }
 
